@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\haand\\source\\repos\\MathGame\\",
+  "WorkspaceRootPath": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\mathgame\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\mathgame\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\mathgame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,11 +28,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "GameMode.cs",
-              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\MathGame\\GameMode.cs",
+              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\GameMode.cs",
               "RelativeDocumentMoniker": "GameMode.cs",
-              "ToolTip": "C:\\Users\\haand\\source\\repos\\MathGame\\GameMode.cs",
+              "ToolTip": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\GameMode.cs",
               "RelativeToolTip": "GameMode.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBEAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T08:55:08.354Z",
               "EditorCaption": ""
@@ -41,22 +41,21 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Menu.cs",
-              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\MathGame\\Menu.cs",
+              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\Menu.cs",
               "RelativeDocumentMoniker": "Menu.cs",
-              "ToolTip": "C:\\Users\\haand\\source\\repos\\MathGame\\Menu.cs",
+              "ToolTip": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\Menu.cs",
               "RelativeToolTip": "Menu.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T08:20:58.61Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T08:20:58.61Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\MathGame\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\haand\\source\\repos\\MathGame\\Program.cs",
+              "ToolTip": "C:\\Users\\haand\\source\\repos\\TheCsharpAcademy\\MathGame\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

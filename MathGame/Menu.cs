@@ -11,7 +11,6 @@ namespace MathGame
         private bool displayMenu = true;
         public void ShowMenu()
         {
-            
             while (displayMenu)
             {
                 Console.Clear();
@@ -19,6 +18,7 @@ namespace MathGame
                 Console.WriteLine("1 - Addition Game\n2 - Substraction game\n3 - Multiplication game\n4 - Division game\nQ - Quit Game");
                 ConsoleKey selectedOption = Console.ReadKey().Key;
 
+                
                 switch (selectedOption)
                 {
                     case ConsoleKey.D1:
