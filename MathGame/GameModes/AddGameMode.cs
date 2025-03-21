@@ -8,7 +8,7 @@ namespace MathGame.GameModes
         private Random Rand = new();
         private readonly float HardGameTimeLimit = 60.0f;
 
-        public AddGameMode(Difficulty level = Difficulty.Easy) : base(level) { }
+        public AddGameMode(Difficulty level = Difficulty.Medium) : base(level) { }
         public override void Start()
         {
             Console.Clear();
@@ -25,6 +25,7 @@ namespace MathGame.GameModes
                     break;
                 case Difficulty.Medium:
                     PlayerHealth = 3;
+                    MediumGame();
                     break;
                 case Difficulty.Hard:
                     PlayerHealth = 1;
@@ -33,12 +34,18 @@ namespace MathGame.GameModes
 
             stopwatch.Stop();
             TimeElapsed = stopwatch.Elapsed;
+            Console.Write("bbb");
             OnGameOver();
+            Console.ReadKey();
+
+            Console.Write("AAA");
+
+
         }
         public override void Restart()
         {
-            Score = 0;
-
+            Console.Write("Add Game Begins");
+            base.Restart();
         }
 
 
@@ -86,15 +93,14 @@ namespace MathGame.GameModes
         /// <summary>
         /// Rules:
         /// - 3 numbers within 0-100
-        /// - No time Limit per question
+        /// - 60 sec per question
         /// - 2x Score
         /// - 3 lifes
         /// - positive numbers only
         /// </summary>
         protected override void MediumGame()
         {
-            int firstNumber = 0;
-            int secondNumber = 0;
+            int firstNumber, secondNumber;
             do
             {
                 firstNumber = Rand.Next(101);
@@ -102,16 +108,20 @@ namespace MathGame.GameModes
                 Console.SetCursorPosition(0, 1);
                 Console.WriteLine($"What's {firstNumber} + {secondNumber}? ");
 
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == firstNumber + secondNumber)
+                StartTimer(60);
+
+                if (int.TryParse(Console.ReadLine(), out int answer) && answer == firstNumber + secondNumber && !IsTimeUp())
                 {
                     DisplayAnswer($"Correct! {firstNumber} + {secondNumber} equals {firstNumber + secondNumber}", ConsoleColor.Green);
                     Score += 2;
                     CurrentStreak++;
+                    StopTimer();
                 }
                 else
                 {
                     DisplayAnswer($"Incorrect! {firstNumber} + {secondNumber} equals {firstNumber + secondNumber}", ConsoleColor.Red);
-                    PlayerHealth--;
+                    PlayerHealth--; 
+                    StopTimer();
                 }
 
                 if (CurrentStreak > BiggestStreak)

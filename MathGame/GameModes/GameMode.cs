@@ -18,14 +18,15 @@ namespace MathGame.GameModes
         public int BiggestStreak { get; protected set; }
         protected int CurrentStreak { get; set; }
 
-        protected Timer QuestionTimer;
-        protected int TimeLeft;
+        private readonly Timer QuestionTimer;
+        private int TimeLeft;
         private bool HasAnswered;
 
         public GameMode(Difficulty level = Difficulty.Easy)
         {
             SelectedDifficulty = level;
             QuestionTimer = new Timer();
+            QuestionTimer.Interval = 1000;
             QuestionTimer.Elapsed += DisplayTimer;
         }
         public abstract void Start();
@@ -100,29 +101,46 @@ namespace MathGame.GameModes
             Console.SetCursorPosition(0, currentLine);
             Console.ForegroundColor = consoleForegroundColor;
             Console.Write(message);
-
+            Console.ResetColor();
             Console.SetCursorPosition(0, currentLine - 1);
         }
 
         //Display Timer on Right side of the console
         protected void DisplayTimer(object? sender, ElapsedEventArgs e)
         {
+            Console.CursorVisible = false;
             (int prevLeft, int prevTop) = Console.GetCursorPosition();
             Console.SetCursorPosition(Console.BufferWidth - 15, 0);
             Console.Write(new string(' ', 15));
             Console.SetCursorPosition(Console.BufferWidth - 15, 0);
             TimeLeft--;
-            Console.Write(TimeLeft > 0 ? $"Time Left:{TimeLeft}" : "Time's Up!");
-
+            Console.Write(!IsTimeUp() ? $"Time Left:{TimeLeft}" : "Time's Up!");
             Console.SetCursorPosition(prevLeft, prevTop);
+            Console.CursorVisible = true;
+            
+            if (IsTimeUp())
+            {
+                StopTimer();
+                Console.Write("Time's up! Press Any Key to continue");
+            }
+
         }
 
         protected void StartTimer(int timeLeft)
         {
             TimeLeft = timeLeft;
             QuestionTimer.Start();
-
         }
+
+        protected void StopTimer() { 
+            QuestionTimer.Stop();
+        }
+
+        protected bool IsTimeUp()
+        {
+            return TimeLeft < 0;
+        }
+
 
     }
 
