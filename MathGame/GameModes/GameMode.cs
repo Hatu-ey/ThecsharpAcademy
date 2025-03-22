@@ -1,4 +1,5 @@
-﻿using MathGame.Models;
+﻿using MathGame.Classes;
+using MathGame.Models;
 using System.Diagnostics;
 using System.Security.AccessControl;
 using System.Text.Json;
@@ -19,7 +20,8 @@ namespace MathGame.GameModes
         protected int CurrentStreak { get; set; }
 
         private readonly Timer QuestionTimer;
-        private int TimeLeft;
+        private int _timeLeft;
+        protected int TimeLeft { get => _timeLeft; set => _timeLeft = Math.Max(value, 0); }
         private bool HasAnswered;
 
         public GameMode(Difficulty level = Difficulty.Easy)
@@ -51,6 +53,7 @@ namespace MathGame.GameModes
                     Restart();
                 } else if(userAnswer == "n")
                 {
+                    askAgain = false;
                     Console.WriteLine("Thanks For playing! Press any Key to continue");
                     Console.ReadKey();
                     Menu MainMenu = new();
@@ -84,6 +87,12 @@ namespace MathGame.GameModes
             Console.SetCursorPosition(prevLeft, prevTop);
         }
 
+        /// <summary>
+        /// Displays message to user below their input, clears both line where user types and next one (we assume user creates nl after their input)
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="consoleForegroundColor"></param>
+        /// <exception cref="InvalidOperationException"></exception>
         protected void DisplayAnswer(string message, ConsoleColor consoleForegroundColor = ConsoleColor.Black)
         {
             int currentLine = Console.CursorTop;
@@ -105,7 +114,7 @@ namespace MathGame.GameModes
             Console.SetCursorPosition(0, currentLine - 1);
         }
 
-        //Display Timer on Right side of the console
+        //Display Timer on Top-Right side of the console
         protected void DisplayTimer(object? sender, ElapsedEventArgs e)
         {
             Console.CursorVisible = false;
@@ -126,9 +135,14 @@ namespace MathGame.GameModes
 
         }
 
+        /// <summary>
+        /// Set seconds that player has to answer, add 1 sec before loading the question
+        /// </summary>
+        /// <param name="timeLeft"></param>
         protected void StartTimer(int timeLeft)
         {
             TimeLeft = timeLeft;
+            DisplayTimer(this, new ElapsedEventArgs(DateTime.Now));
             QuestionTimer.Start();
         }
 
@@ -138,7 +152,7 @@ namespace MathGame.GameModes
 
         protected bool IsTimeUp()
         {
-            return TimeLeft < 0;
+            return TimeLeft <= 0;
         }
 
 

@@ -1,11 +1,6 @@
 ﻿using MathGame.GameModes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MathGame
+namespace MathGame.Classes
 {
     internal class Menu
     {
