@@ -5,19 +5,19 @@ namespace MathGame.GameModes
 {
     internal class AddGameMode : GameMode
     {
-        private Random Rand = new();
-        private readonly int MediumGameTimeLimit = 601;
-        private readonly int HardGameTimeLimit = 60;
+        private const int MediumGameTimeLimit = 601;
+        private const int MediumGameBaseScoring = 2;
 
-        public AddGameMode(Difficulty level = Difficulty.Hard) : base(level) { }
+        private const int HardGameTimeLimit = 61;
+        private const int HardGameBaseScoring = 5;
+
+        public AddGameMode(Difficulty level = Difficulty.Easy) : base(level) { }
         public override void Start()
         {
             Console.Clear();
-            Console.WriteLine("Add Game Begins!");
-
-            Stopwatch stopwatch = Stopwatch.StartNew();
             DisplayScore();
-            stopwatch.Start();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             switch (SelectedDifficulty)
             {
                 case Difficulty.Easy:
@@ -34,21 +34,15 @@ namespace MathGame.GameModes
                     break;
             }
 
+            GameTimer.Stop();
             stopwatch.Stop();
             TimeElapsed = stopwatch.Elapsed;
             OnGameOver();
-            Console.ReadKey();
         }
-        public override void Restart()
-        {
-            Console.Write("Add Game Begins");
-            base.Restart();
-        }
-
 
         /// <summary>
         /// Rules:
-        /// - 2 numbers within 0-10
+        /// - 2 numbers within 0-10 int
         /// - No time Limit per question
         /// - Normal Scoring
         /// - 5 lifes
@@ -63,22 +57,17 @@ namespace MathGame.GameModes
                 firstNumber = Rand.Next(11);
                 secondNumber = Rand.Next(11);
                 correctAnswer = firstNumber + secondNumber;
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber} + {secondNumber}? ");
 
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == correctAnswer)
+                if (AskQuestion(correctAnswer, $"What's {firstNumber} + {secondNumber}? "))
                 {
-                    DisplayAnswer($"Correct! {firstNumber} + {secondNumber} equals {correctAnswer}", ConsoleColor.Green);
                     Score++;
-                    CurrentStreak++;
                 }
                 else
                 {
-                    DisplayAnswer($"Incorrect! {firstNumber} + {secondNumber} equals {correctAnswer}", ConsoleColor.Red);
                     PlayerHealth--;
                 }
 
-                if(CurrentStreak > BiggestStreak)
+                if (CurrentStreak > BiggestStreak)
                     BiggestStreak = CurrentStreak;
 
                 Round++;
@@ -89,34 +78,29 @@ namespace MathGame.GameModes
 
         /// <summary>
         /// Rules:
-        /// - 2 numbers within 0-100
+        /// - 2 numbers within 0-100 int
         /// - 5 minutes to answer as many questions as they can
-        /// - 2x Score + streak points
+        /// - 2 points + streak points
         /// - 3 lifes
         /// - positive numbers only
         /// </summary>
         protected override void MediumGame()
         {
             int firstNumber, secondNumber, correctAnswer;
-            StartTimer(MediumGameTimeLimit);
+            GameTimer.Start(MediumGameTimeLimit);
 
             do
             {
                 firstNumber = Rand.Next(101);
                 secondNumber = Rand.Next(101);
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber} + {secondNumber}? ");
                 correctAnswer = firstNumber + secondNumber;
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == correctAnswer)
+                if (AskQuestion(correctAnswer, $"What's {firstNumber} + {secondNumber}? "))
                 {
-                    DisplayAnswer($"Correct! {firstNumber} + {secondNumber} equals {correctAnswer}", ConsoleColor.Green);
-                    CurrentStreak++;
-                    Score += 2 + CurrentStreak;
+                    Score += MediumGameBaseScoring + CurrentStreak;
                 }
                 else
                 {
-                    DisplayAnswer($"Incorrect! {firstNumber} + {secondNumber} equals {correctAnswer}", ConsoleColor.Red);
-                    PlayerHealth--; 
+                    PlayerHealth--;
                 }
 
                 if (CurrentStreak > BiggestStreak)
@@ -125,7 +109,7 @@ namespace MathGame.GameModes
                 Round++;
                 DisplayScore();
             }
-            while (PlayerHealth > 0 && !IsTimeUp());
+            while (PlayerHealth > 0 && !GameTimer.IsTimeUp());
 
         }
 
@@ -133,36 +117,29 @@ namespace MathGame.GameModes
         /// Rules:
         /// - 3 numbers within 0-100
         /// - 60 sec per question
-        /// - 3x Score + streak as extra points
+        /// - 5 points + streak as extra points per question
         /// - 1 life
-        /// - positive numbers only
+        /// - positive numbers only 2 point precision
         /// </summary>
         protected override void HardGame()
         {
 
-            int firstNumber, secondNumber, thirdNumber, correctAnswer;
+            double firstNumber, secondNumber, thirdNumber, correctAnswer;
             do
             {
-                firstNumber = Rand.Next(101);
-                secondNumber = Rand.Next(101);
-                thirdNumber = Rand.Next(101);
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber} + {secondNumber} + {thirdNumber}? ");
-                correctAnswer = firstNumber + secondNumber + thirdNumber;
+                firstNumber = Rand.NextDouble() * 100;
+                secondNumber = Rand.NextDouble() * 100;
+                thirdNumber = Rand.NextDouble() * 100;
+                correctAnswer = Math.Round(firstNumber + secondNumber + thirdNumber, 2);
 
-                StartTimer(HardGameTimeLimit);
+                GameTimer.Start(HardGameTimeLimit);
 
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == correctAnswer && !IsTimeUp())
+                if (AskQuestion(correctAnswer, $"What's {firstNumber:F2} + {secondNumber:F2} + {thirdNumber:F2} ans {correctAnswer}?"))
                 {
-                    StopTimer();
-                    DisplayAnswer($"Correct! {firstNumber} + {secondNumber} + {thirdNumber} equals {correctAnswer}", ConsoleColor.Green);
-                    CurrentStreak++;
-                    Score += 4 + CurrentStreak;
+                    Score += HardGameBaseScoring + CurrentStreak;
                 }
                 else
                 {
-                    StopTimer();
-                    DisplayAnswer($"Incorrect! {firstNumber} + {secondNumber} + {thirdNumber} equals {correctAnswer}", ConsoleColor.Red);
                     PlayerHealth--;
                 }
 
@@ -174,7 +151,6 @@ namespace MathGame.GameModes
             }
             while (PlayerHealth > 0);
         }
-
-       
     }
+
 }

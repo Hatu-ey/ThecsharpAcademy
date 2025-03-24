@@ -21,6 +21,8 @@ namespace MathGame.Classes
                     break;
                 case ConsoleKey.D2:
                     Console.WriteLine("Substraction Game");
+                    SubGameMode subGame = new();
+                    subGame.Start();
                     break;
                 case ConsoleKey.D3:
                     Console.WriteLine("Multiplication Game");

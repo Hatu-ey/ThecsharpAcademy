@@ -1,10 +1,5 @@
 ﻿using MathGame.Classes;
 using MathGame.Models;
-using System.Diagnostics;
-using System.Security.AccessControl;
-using System.Text.Json;
-using System.Timers;
-using Timer = System.Timers.Timer;
 
 namespace MathGame.GameModes
 {
@@ -19,20 +14,17 @@ namespace MathGame.GameModes
         public int BiggestStreak { get; protected set; }
         protected int CurrentStreak { get; set; }
 
-        private readonly Timer QuestionTimer;
-        private int _timeLeft;
-        protected int TimeLeft { get => _timeLeft; set => _timeLeft = Math.Max(value, 0); }
-        private bool HasAnswered;
+        protected Random Rand = new();
+        protected GameTimer GameTimer { get; private set; }
 
         public GameMode(Difficulty level = Difficulty.Easy)
         {
             SelectedDifficulty = level;
-            QuestionTimer = new Timer();
-            QuestionTimer.Interval = 1000;
-            QuestionTimer.Elapsed += DisplayTimer;
+            GameTimer = new GameTimer();
         }
         public abstract void Start();
-        protected void OnGameOver() {
+        protected void OnGameOver()
+        {
 
             //TODO: Implement Saving Score
             // SaveScore();
@@ -40,18 +32,20 @@ namespace MathGame.GameModes
             do
             {
                 Console.Clear();
+                Console.WriteLine($"GameOver! Final Score: {Score} Biggest Streak: {BiggestStreak} Time: {TimeElapsed}");
                 Console.WriteLine("Do you wish to restart the game? y/n?");
                 string? userAnswer = Console.ReadLine();
-                
+
                 if (userAnswer == null) continue;
-                
-                userAnswer = userAnswer.Trim().ToLower();
+
+                userAnswer = userAnswer?.Trim().ToLower();
 
                 if (userAnswer == "y")
                 {
                     askAgain = false;
                     Restart();
-                } else if(userAnswer == "n")
+                }
+                else if (userAnswer == "n")
                 {
                     askAgain = false;
                     Console.WriteLine("Thanks For playing! Press any Key to continue");
@@ -100,7 +94,7 @@ namespace MathGame.GameModes
             {
                 throw new InvalidOperationException("Cannot write above the console window.");
             }
-            
+
             //clear line above, where user types answer
             Console.SetCursorPosition(0, currentLine - 1);
             Console.Write(new string(' ', Console.WindowWidth));
@@ -114,50 +108,30 @@ namespace MathGame.GameModes
             Console.SetCursorPosition(0, currentLine - 1);
         }
 
-        //Display Timer on Top-Right side of the console
-        protected void DisplayTimer(object? sender, ElapsedEventArgs e)
-        {
-            Console.CursorVisible = false;
-            (int prevLeft, int prevTop) = Console.GetCursorPosition();
-            Console.SetCursorPosition(Console.BufferWidth - 15, 0);
-            Console.Write(new string(' ', 15));
-            Console.SetCursorPosition(Console.BufferWidth - 15, 0);
-            TimeLeft--;
-            Console.Write(!IsTimeUp() ? $"Time Left:{TimeLeft}" : "Time's Up!");
-            Console.SetCursorPosition(prevLeft, prevTop);
-            Console.CursorVisible = true;
-            
-            if (IsTimeUp())
-            {
-                StopTimer();
-                Console.Write("Time's up! Press Any Key to continue");
-            }
-
-        }
-
         /// <summary>
-        /// Set seconds that player has to answer, add 1 sec before loading the question
+        /// 
         /// </summary>
-        /// <param name="timeLeft"></param>
-        protected void StartTimer(int timeLeft)
+        /// <param name="correctAnswer"></param>
+        /// <param name="question"></param>
+        /// <returns>true if user answers correctly, false otherwise</returns>
+        protected bool AskQuestion(double correctAnswer, string question)
         {
-            TimeLeft = timeLeft;
-            DisplayTimer(this, new ElapsedEventArgs(DateTime.Now));
-            QuestionTimer.Start();
+            Console.SetCursorPosition(0, 1);
+            Console.WriteLine(question);
+
+            if (double.TryParse(Console.ReadLine(), out double answer) && answer == correctAnswer)
+            {
+                DisplayAnswer($"Correct! The answer is {correctAnswer}", ConsoleColor.Green);
+                CurrentStreak++;
+                return true;
+            }
+            else
+            {
+                DisplayAnswer($"Incorrect! The correct answer is {correctAnswer}", ConsoleColor.Red);
+                CurrentStreak = 0;
+                return false;
+            }
         }
-
-        protected void StopTimer() { 
-            QuestionTimer.Stop();
-        }
-
-        protected bool IsTimeUp()
-        {
-            return TimeLeft <= 0;
-        }
-
-
     }
-
-
 }
 
