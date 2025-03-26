@@ -4,30 +4,23 @@ using MathGame.Models;
 namespace MathGame.GameModes
 {
     public enum Difficulty { Easy, Medium, Hard };
-    abstract class GameMode
+    abstract class GameMode(Difficulty level = Difficulty.Easy)
     {
         public int PlayerHealth { get; protected set; }
         public int Score { get; protected set; }
         public TimeSpan TimeElapsed { get; protected set; }
-        public Difficulty SelectedDifficulty { get; protected set; }
+        public Difficulty SelectedDifficulty { get; protected set; } = level;
         public int Round { get; protected set; }
         public int BiggestStreak { get; protected set; }
         protected int CurrentStreak { get; set; }
 
         protected Random Rand = new();
-        protected GameTimer GameTimer { get; private set; }
+        protected GameTimer GameTimer { get; private set; } = new GameTimer();
 
-        public GameMode(Difficulty level = Difficulty.Easy)
-        {
-            SelectedDifficulty = level;
-            GameTimer = new GameTimer();
-        }
         public abstract void Start();
         protected void OnGameOver()
         {
-
-            //TODO: Implement Saving Score
-            // SaveScore();
+            SaveManager.AddGameHistory(new PlayerData {GameMode = this, Date = DateTime.Now });
             bool askAgain = true;
             do
             {
@@ -87,7 +80,7 @@ namespace MathGame.GameModes
         /// <param name="message"></param>
         /// <param name="consoleForegroundColor"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        protected void DisplayAnswer(string message, ConsoleColor consoleForegroundColor = ConsoleColor.Black)
+        private static void DisplayAnswer(string message, ConsoleColor consoleForegroundColor = ConsoleColor.Black)
         {
             int currentLine = Console.CursorTop;
             if (currentLine == 0)
@@ -123,6 +116,10 @@ namespace MathGame.GameModes
             {
                 DisplayAnswer($"Correct! The answer is {correctAnswer}", ConsoleColor.Green);
                 CurrentStreak++;
+
+                if (CurrentStreak > BiggestStreak)
+                    BiggestStreak = CurrentStreak;
+
                 return true;
             }
             else
@@ -131,6 +128,11 @@ namespace MathGame.GameModes
                 CurrentStreak = 0;
                 return false;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Score:{Score} BiggestStreak:{BiggestStreak} Rounds:{Round} TimeElapsed: {TimeElapsed} Difficulty: {SelectedDifficulty}";
         }
     }
 }

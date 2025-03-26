@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace MathGame.GameModes
 {
-    internal class SubGameMode : GameMode
+    internal class SubGameMode(Difficulty level = Difficulty.Easy) : GameMode(level)
     {
         private const int MediumGameTimeLimit = 181;
-        private const int HardGameTimeLimit = 61;
+        private const int MediumGameBaseScoring = 2;
 
-        public SubGameMode(Difficulty level = Difficulty.Hard) : base(level) { }
+        private const int HardGameTimeLimit = 61;
+        private const int HardGameBaseScoring = 5;
+
         public override void Start()
         {
             Console.Clear();
-            Console.WriteLine("Sub Game Begins!");
             DisplayScore();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -37,7 +33,7 @@ namespace MathGame.GameModes
                     break;
             }
 
-
+            GameTimer.Stop();
             stopwatch.Stop();
             TimeElapsed = stopwatch.Elapsed;
             OnGameOver();
@@ -59,7 +55,7 @@ namespace MathGame.GameModes
             {
                 firstNumber = Rand.Next(11);
                 secondNumber = Rand.Next(11);
-                if(firstNumber > secondNumber)
+                if(firstNumber < secondNumber)
                 {
                     (firstNumber, secondNumber) = (secondNumber, firstNumber);
                 }
@@ -67,23 +63,15 @@ namespace MathGame.GameModes
                 correctAnswer = firstNumber - secondNumber;
 
                 Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber} - {secondNumber}? ");
+                Console.WriteLine();
 
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == correctAnswer)
+                if(AskQuestion(correctAnswer, $"What's {firstNumber} - {secondNumber}? "))
                 {
-                    DisplayAnswer($"Correct! {firstNumber} - {secondNumber} equals {correctAnswer}", ConsoleColor.Green);
                     Score++;
-                    CurrentStreak++;
-                }
-                else
+                } else
                 {
-                    DisplayAnswer($"Incorrect! {firstNumber} - {secondNumber} equals {correctAnswer}", ConsoleColor.Red);
                     PlayerHealth--;
-                    CurrentStreak = 0;
                 }
-
-                if (CurrentStreak > BiggestStreak)
-                    BiggestStreak = CurrentStreak;
 
                 Round++;
                 DisplayScore();
@@ -96,6 +84,7 @@ namespace MathGame.GameModes
         /// - 2 numbers within 0-100 int
         /// - 3 minutes to answer as many questions as they can
         /// - 2x Score + streak points
+        /// - lose 1 point on wrong answer
         /// - 3 lifes
         /// - non negative result
         /// </summary>
@@ -109,29 +98,22 @@ namespace MathGame.GameModes
                 firstNumber = Rand.Next(101);
                 secondNumber = Rand.Next(101);
 
-                if (firstNumber > secondNumber)
+                if (firstNumber < secondNumber)
                 {
                     (firstNumber, secondNumber) = (secondNumber, firstNumber);
                 }
 
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber} - {secondNumber}? ");
                 correctAnswer = firstNumber - secondNumber;
-                if (int.TryParse(Console.ReadLine(), out int answer) && answer == correctAnswer)
+
+                if(AskQuestion(correctAnswer, $"What's {firstNumber} - {secondNumber}? ") && !GameTimer.IsTimeUp())
                 {
-                    DisplayAnswer($"Correct! {firstNumber} - {secondNumber} equals {correctAnswer}", ConsoleColor.Green);
-                    CurrentStreak++;
-                    Score += 2 + CurrentStreak;
+                    Score += MediumGameBaseScoring + CurrentStreak;
                 }
                 else
                 {
-                    DisplayAnswer($"Incorrect! {firstNumber} - {secondNumber} equals {correctAnswer}", ConsoleColor.Red);
                     PlayerHealth--;
-                    CurrentStreak = 0;
+                    Score--;
                 }
-
-                if (CurrentStreak > BiggestStreak)
-                    BiggestStreak = CurrentStreak;
 
                 Round++;
                 DisplayScore();
@@ -145,6 +127,7 @@ namespace MathGame.GameModes
         /// - 2 numbers within 0-100
         /// - 60 sec per question
         /// - 3x Score + streak as extra points
+        /// - lose 3 points on wrong answer
         /// - 1 life
         /// - numbers with 2 point precision
         /// result may be negative
@@ -155,34 +138,22 @@ namespace MathGame.GameModes
             double firstNumber, secondNumber, correctAnswer;
             do
             {
-                firstNumber = Rand.NextDouble() * 100;
-                secondNumber = Rand.NextDouble() * 100;
+                firstNumber = Math.Round(Rand.NextDouble() * 100, 2);
+                secondNumber = Math.Round(Rand.NextDouble() * 100, 2);
                 correctAnswer = Math.Round(firstNumber - secondNumber, 2);
-                correctAnswer = 0;
 
-
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"What's {firstNumber:F2} - {secondNumber:F2} ? ");
                 GameTimer.Start(HardGameTimeLimit);
 
-                if (double.TryParse(Console.ReadLine(), out double answer) && answer == correctAnswer && !GameTimer.IsTimeUp())
+                if(AskQuestion(correctAnswer, $"What's {firstNumber:F2} - {secondNumber:F2} ? "))
                 {
-                    GameTimer.Stop();
-                    DisplayAnswer($"Correct! {firstNumber:F2} - {secondNumber:F2} equals {correctAnswer:F2}", ConsoleColor.Green);
-                    CurrentStreak++;
-                    Score += 4 + CurrentStreak;
-                }
-                else
+                    Score += HardGameBaseScoring + CurrentStreak;
+                } else
                 {
-                    GameTimer.Stop();
-                    DisplayAnswer($"Incorrect! {firstNumber:F2} - {secondNumber:F2} equals {correctAnswer:F2}", ConsoleColor.Red);
+                    Score -= 3;
                     PlayerHealth--;
-                    CurrentStreak = 0;
                 }
 
-                if (CurrentStreak > BiggestStreak)
-                    BiggestStreak = CurrentStreak;
-
+                GameTimer.Stop();
                 Round++;
                 DisplayScore();
             }

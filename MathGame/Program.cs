@@ -3,3 +3,6 @@ using MathGame.Classes;
 
 Menu menu = new();
 menu.DisplayMenu();
+
+
+Console.ReadKey();

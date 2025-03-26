@@ -1,15 +1,16 @@
-﻿using System.Diagnostics;
+﻿using MathGame.Classes;
+using System.Diagnostics;
 
 
 namespace MathGame.GameModes
 {
-    internal class AddGameMode(Difficulty level = Difficulty.Easy) : GameMode(level)
+    internal class DivisionGameMode(Difficulty level = Difficulty.Easy) : GameMode(level)
     {
         private const int MediumGameTimeLimit = 601;
-        private const int MediumGameBaseScoring = 2;
+        private const int MediumGameBaseScoring = 10;
 
-        private const int HardGameTimeLimit = 61;
-        private const int HardGameBaseScoring = 5;
+        private const int HardGameTimeLimit = 301;
+        private const int HardGameBaseScoring = 20;
 
         public override void Start()
         {
@@ -39,25 +40,27 @@ namespace MathGame.GameModes
             OnGameOver();
         }
 
+        
+
         /// <summary>
         /// Rules:
         /// - 2 numbers within 0-10 int
         /// - No time Limit per question
         /// - Normal Scoring
         /// - 5 lifes
-        /// - positive numbers only
+        /// - positive and integers numbers only
         /// </summary>
         protected override void EasyGame()
         {
 
-            int firstNumber, secondNumber, correctAnswer;
+            (int dividend, int divisor) numbers;
+            int correctAnswer;
             do
             {
-                firstNumber = Rand.Next(11);
-                secondNumber = Rand.Next(11);
-                correctAnswer = firstNumber + secondNumber;
+                numbers = GameHelper.GenerateDivisionNumbers(10);
+                correctAnswer = numbers.dividend / numbers.divisor;
 
-                if (AskQuestion(correctAnswer, $"What's {firstNumber} + {secondNumber}? "))
+                if (AskQuestion(correctAnswer, $"What's {numbers.dividend} / {numbers.divisor}? "))
                 {
                     Score++;
                 }
@@ -65,6 +68,7 @@ namespace MathGame.GameModes
                 {
                     PlayerHealth--;
                 }
+
 
                 Round++;
                 DisplayScore();
@@ -75,23 +79,23 @@ namespace MathGame.GameModes
         /// <summary>
         /// Rules:
         /// - 2 numbers within 0-100 int
-        /// - 5 minutes to answer as many questions as they can
-        /// - 2 points + streak points
+        /// - 10 minutes to answer as many questions as they can
+        /// - 10 points + streak points
         /// - 3 lifes
         /// - positive numbers only
         /// </summary>
         protected override void MediumGame()
         {
-            int firstNumber, secondNumber, correctAnswer;
+            (int dividend, int divisor) numbers;
+            int correctAnswer;
+
             GameTimer.Start(MediumGameTimeLimit);
 
             do
             {
-                firstNumber = Rand.Next(101);
-                secondNumber = Rand.Next(101);
-                correctAnswer = firstNumber + secondNumber;
-
-                if (AskQuestion(correctAnswer, $"What's {firstNumber} + {secondNumber}? ") && !GameTimer.IsTimeUp())
+                numbers = GameHelper.GenerateDivisionNumbers(100);
+                correctAnswer = numbers.dividend / numbers.divisor;
+                if (AskQuestion(correctAnswer, $"What's {numbers.dividend} / {numbers.divisor}? ") && !GameTimer.IsTimeUp())
                 {
                     Score += MediumGameBaseScoring + CurrentStreak;
                 }
@@ -100,7 +104,6 @@ namespace MathGame.GameModes
                     PlayerHealth--;
                 }
 
-             
 
                 Round++;
                 DisplayScore();
@@ -112,33 +115,37 @@ namespace MathGame.GameModes
         /// <summary>
         /// Rules:
         /// - 3 numbers within 0-100
-        /// - 60 sec per question
-        /// - 5 points + streak as extra points per question
+        /// - 5 min per question
+        /// - 20 points + streak as extra points per question
         /// - 1 life
-        /// - positive numbers only 2 point precision
+        /// - gain extra life every 10 streak
         /// </summary>
         protected override void HardGame()
         {
 
-            double firstNumber, secondNumber, thirdNumber, correctAnswer;
+            (int dividend, int divisor) numbers;
+            int correctAnswer;
+
             do
             {
-                firstNumber = Rand.NextDouble() * 100;
-                secondNumber = Rand.NextDouble() * 100;
-                thirdNumber = Rand.NextDouble() * 100;
-                correctAnswer = Math.Round(firstNumber + secondNumber + thirdNumber, 2);
+                numbers = GameHelper.GenerateDivisionNumbers(100);
+                correctAnswer = numbers.dividend / numbers.divisor;
 
                 GameTimer.Start(HardGameTimeLimit);
 
-                if (AskQuestion(correctAnswer, $"What's {firstNumber:F2} + {secondNumber:F2} + {thirdNumber:F2} ans {correctAnswer}?"))
+                if (AskQuestion(correctAnswer, $"What's {numbers.dividend} / {numbers.divisor}?"))
                 {
                     Score += HardGameBaseScoring + CurrentStreak;
+                    if(CurrentStreak % 10 == 0)
+                    {
+                        PlayerHealth++;
+                    }
                 }
                 else
                 {
                     PlayerHealth--;
                 }
-                
+
                 GameTimer.Stop();
                 Round++;
                 DisplayScore();
@@ -146,5 +153,4 @@ namespace MathGame.GameModes
             while (PlayerHealth > 0);
         }
     }
-
 }

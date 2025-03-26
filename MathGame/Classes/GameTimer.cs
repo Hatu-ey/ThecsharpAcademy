@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Timers;
+﻿using System.Timers;
 using Timer = System.Timers.Timer;
 
 namespace MathGame.Classes
@@ -41,7 +37,7 @@ namespace MathGame.Classes
         }
 
         /// <summary>
-        /// Set seconds that player has to answer, add 1 sec before loading the question
+        /// Set divisor s that player has to answer, add 1 sec before loading the question
         /// </summary>
         /// <param name="timeLeft"></param>
         public void Start(int timeLeft)
@@ -60,5 +56,11 @@ namespace MathGame.Classes
         {
             return TimeLeft <= 0;
         }
+
+        ~GameTimer()
+        {
+            _timer.Dispose();
+        }
+
     }
 }
