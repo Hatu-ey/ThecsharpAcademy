@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\gamemodes\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:gamemodes\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\classes\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:classes\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\classes\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:classes\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\gamemodes\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:gamemodes\\gamemode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\classes\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|solutionrelative:classes\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{16D31ABA-7305-4192-AAB4-1BA6B61D330B}|MathGame.csproj|c:\\users\\haand\\source\\repos\\thecsharpacademy\\mathgame\\classes\\gamehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,20 +66,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SubGameMode.cs",
-              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\SubGameMode.cs",
-              "RelativeDocumentMoniker": "GameModes\\SubGameMode.cs",
-              "ToolTip": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\SubGameMode.cs",
-              "RelativeToolTip": "GameModes\\SubGameMode.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAYwI0AAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T21:08:34.509Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -87,8 +74,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T23:06:50.992Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T23:06:50.992Z"
             },
             {
               "$type": "Document",
@@ -100,8 +86,7 @@
               "RelativeToolTip": "Classes\\GameHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T09:14:49.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T09:14:49.274Z"
             },
             {
               "$type": "Document",
@@ -113,8 +98,7 @@
               "RelativeToolTip": "GameModes\\RandomGameMode.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAArwDYAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T08:41:47.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T08:41:47.495Z"
             },
             {
               "$type": "Document",
@@ -126,12 +110,11 @@
               "RelativeToolTip": "Classes\\GameTimer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:40:00.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T15:40:00.161Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "PlayerData.cs",
               "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Models\\PlayerData.cs",
               "RelativeDocumentMoniker": "Models\\PlayerData.cs",
@@ -139,47 +122,58 @@
               "RelativeToolTip": "Models\\PlayerData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T21:03:45.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T21:03:45.154Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "SaveManager.cs",
               "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Classes\\SaveManager.cs",
               "RelativeDocumentMoniker": "Classes\\SaveManager.cs",
               "ToolTip": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Classes\\SaveManager.cs",
               "RelativeToolTip": "Classes\\SaveManager.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-26T16:32:38.323Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Menu.cs",
               "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Classes\\Menu.cs",
               "RelativeDocumentMoniker": "Classes\\Menu.cs",
               "ToolTip": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\Classes\\Menu.cs",
               "RelativeToolTip": "Classes\\Menu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA8AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-25T15:39:59.239Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "GameMode.cs",
               "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\GameMode.cs",
               "RelativeDocumentMoniker": "GameModes\\GameMode.cs",
               "ToolTip": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\GameMode.cs",
               "RelativeToolTip": "GameModes\\GameMode.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAuwIYAAACLAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAhwD0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T21:03:31.796Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SubGameMode.cs",
+              "DocumentMoniker": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\SubGameMode.cs",
+              "RelativeDocumentMoniker": "GameModes\\SubGameMode.cs",
+              "ToolTip": "C:\\Users\\haand\\source\\repos\\ThecsharpAcademy\\MathGame\\GameModes\\SubGameMode.cs",
+              "RelativeToolTip": "GameModes\\SubGameMode.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAYwI0AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T21:08:34.509Z"
             },
             {
               "$type": "Document",
@@ -191,8 +185,7 @@
               "RelativeToolTip": "GameModes\\AddGameMode.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T21:03:31.065Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T21:03:31.065Z"
             },
             {
               "$type": "Document",
@@ -204,8 +197,7 @@
               "RelativeToolTip": "GameModes\\MultiGameMode.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T21:08:43.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T21:08:43.863Z"
             },
             {
               "$type": "Document",
@@ -217,8 +209,7 @@
               "RelativeToolTip": "GameModes\\DivisionGameMode.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T16:38:55.058Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T16:38:55.058Z"
             }
           ]
         }

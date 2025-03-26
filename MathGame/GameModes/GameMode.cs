@@ -59,7 +59,6 @@ namespace MathGame.GameModes
             CurrentStreak = 0;
             Start();
         }
-        protected void SaveScore() { }
         protected abstract void EasyGame();
         protected abstract void MediumGame();
         protected abstract void HardGame();
